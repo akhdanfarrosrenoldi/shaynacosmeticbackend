@@ -29,7 +29,9 @@ class StoreBookingTransactionRequest extends FormRequest
             'city' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'post_code' => 'required|string|max:255',
+
             'proof' => 'required|file|mimes:png,jpg,jpeg|max:2048',
+
             'cosmetic_ids' => 'required|array',
             'cosmetic_ids.*.id' => 'required|integer|exists:cosmetics,id',
             'cosmetic_ids.*.quantity' => 'required|integer|min:1',

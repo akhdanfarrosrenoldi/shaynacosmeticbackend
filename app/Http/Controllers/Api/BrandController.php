@@ -12,20 +12,20 @@ class BrandController extends Controller
     //
     public function index(Request $request)
     {
-        $categories = Brand::withCount(['cosmetics']);
+        $brands = Brand::withCount(['cosmetics']);
 
         if ($request->has('limit')) {
-            $categories->limit($request->input('limit'));
+            $brands->limit($request->input('limit'));
         }
 
-        return BrandApiResource::collection($categories->get());
+        return BrandApiResource::collection($brands->get());
     }
 
-    public function show(Brand $category)
+    public function show(Brand $brand)
     {
-        $category->load(['cosmetics', 'popularCosmetics']);
-        $category->loadCount(['cosmetics',]);
+        $brand->load(['cosmetics', 'popularCosmetics']);
+        $brand->loadCount(['cosmetics',]);
 
-        return new BrandApiResource($category);
+        return new BrandApiResource($brand);
     }
 }

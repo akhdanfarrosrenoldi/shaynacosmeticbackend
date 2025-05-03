@@ -52,13 +52,13 @@ class BookingTransactionController extends Controller
             foreach ($products as $product) {
                 $cosmetic = $cosmetics->firstWhere('id', $product['id']);
                 $bookingTransaction->transactionDetails()->create([
-                    'cosmetic' => $product['id'],
+                    'cosmetic_id' => $product['id'],
                     'quantity' => $product['quantity'],
                     'price' => $cosmetic->price,
                 ]);
             }
 
-            return new BookingTransactionApiResource($bookingTransaction->load('transactionDetails'));
+            return new BookingTransactionApiResource($bookingTransaction->load(['transactionDetails', 'transactionDetails.cosmetic']));
 
         } catch (\Exception $e) {
             return response()->json(['message' => 'An error occured', 'error' => $e->getMessage()], 500);
