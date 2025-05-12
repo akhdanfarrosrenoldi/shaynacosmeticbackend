@@ -24,7 +24,7 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        $category->load(['cosmetics', 'popularCosmetics']);
+        $category->load(['cosmetics', 'popularCosmetics', 'cosmetics.brand']);
         $category->loadCount(['cosmetics',]);
 
         return new CategoryApiResource($category);
